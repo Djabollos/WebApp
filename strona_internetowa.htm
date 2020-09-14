@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Aplikacja webowa</title>
+
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<!-- Our Custom CSS -->
+	<link rel="stylesheet" href="styles/webPage_css.css">
+
+	<!-- Font Awesome JS -->
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+
+	<!-- jQuery CDN - Slim version -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+	<!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" ></script>
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+	<!-- Sidebar  -->
+		<nav id="sidebar">
+			<div>
+				<br><img src="styles/rpi.svg" width="150px" class="mx-auto d-block"></img>
+			</div>
+
+			<ul class="list-unstyled components">
+				<p>Menu</p>
+				<li>
+					<a href="rpy.htm" target="frame">Wykres kątów</a>
+				</li>
+				<li>
+					<a href="pogoda.htm" target="frame">Wykres pogody</a>
+				</li>
+				<li>
+					<a href="dioda.htm" target="frame">Matryca LED</a>
+				</li>
+				<li>
+					<a href="dane_pomiarowe.htm" target="frame">Dane pomiarowe</a>
+				</li>
+				<li>
+					<a href="ustawienia.htm" target="frame">Ustawienia</a>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- Page Content  -->
+		<div id="content">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+
+					<button type="button" id="sidebarCollapse" class="btn btn-info" onClick="$('#sidebar').toggleClass('active')">
+						<i class="fas fa-align-left"></i>
+						<span>Menu</span>
+					</button>
+				</div>
+			</nav>
+
+			<div class="embed-responsive embed-responsive-21by9">
+				<iframe class="embed-responsive-item" name="frame"></iframe>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

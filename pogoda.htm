@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<!-- HTML file head: web page metadata -->
+	<head>
+		<title>Pogoda: cisnienie, temperatura i wilgotnosc</title>
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<!-- Chart.js library -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+		
+		<script type="text/javascript" src="pogoda.js"></script> 
+		<link rel="stylesheet" type="text/css" href="styles/pogoda.css">
+	</head>
+
+	<!-- HTML file body: web page content -->
+	<body>
+		<h1 class="text-center">Pogoda: temperatura, ciśnienie i wilgotność</h1>
+		<div id="ramka" class="container border border-primary rounded datagrabber">
+		
+			<ul class="nav">
+				<li><button id="start" type="button" class="btn btn-primary menuitem">Start</button></li>
+				<li><button id="stop" type="button" class="btn btn-primary menuitem">Stop</button></li>
+				<li><div class="border border-primary rounded menuitem"><span>Czas próbkowania: <input type = "number" value = "100" step="10" id="sampletime"></input> ms</span></div></li>  
+				<li><div class="border border-primary rounded menuitem"><span>Maksymalna liczba próbek: <input type = "number" value = "100" step="10" id="samplenumber"></input></span></div></li>  
+			</ul>
+			<div class="chartcontainer">
+				<canvas id="chart"></canvas>
+			</div><br/>
+			<div class="chartcontainer1">
+				<canvas id="chart1"></canvas>
+			</div>
+			<div class="chartcontainer2">
+				<canvas id="chart2"></canvas>
+			</div>
+		
+			</div>
+		</div>
+		
+	</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+</head> 
+	<!-- HTML file head: web page metadata -->
+	<head>
+		<title>Pomiar kątów</title>
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<!-- Chart.js library -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		
+		<script type="text/javascript" src="rpy.js"></script> 
+		<link rel="stylesheet" type="text/css" href="styles/datagrabber_example_css.css">
+	</head>
+
+	<!-- HTML file body: web page content -->
+	<body>
+		<h1 class="text-center">Wykres Roll Pitch Yaw</h1>
+		<div id="datagrabber" class="container border border-primary rounded datagrabber">
+			<ul class="nav">
+				<li><button id="start" type="button" class="btn btn-primary menuitem">Start</button></li>
+				<li><button id="stop" type="button" class="btn btn-primary menuitem">Stop</button></li>
+				<li><div class="border border-primary rounded menuitem"><span>Czas próbkowania: <input type="number" value = "100" step="10" id="sampletime"> ms</span></div></li>  
+				<li><div class="border border-primary rounded menuitem"><span>Max. liczba próbek: <input type="number" value="100" step="10" id="samplenumber"></span></div></li>  
+			</ul>
+			<div class="chartcontainer">
+				<canvas id="chart"></canvas>
+			</div>
+		</div>
+	</body>
+
+</html>
