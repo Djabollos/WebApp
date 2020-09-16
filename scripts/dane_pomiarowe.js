@@ -1,10 +1,11 @@
-var a = '192.168.8.128';
-var zmienna;
-
-var timer;
+var a = '192.168.8.128'; //standardowe ip
+var zmienna;			 //zmienna ktorej nadaje sie ip
+var port; 				 //zmienna ktorej nadaje sie nr portu
+var timer; 				 //do obslugi timera
 
 /**
-* @brief Send HTTP GET request to IoT server
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje z pliku serwera informacje o ip oraz porcie
 */
 function odczyt_adresu() {
 	$.ajax({
@@ -18,7 +19,8 @@ function odczyt_adresu() {
 }
 
 /**
-* @brief Send HTTP GET request to IoT server
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje wszystkie dane pomiarowe i ustawia je w tabeli
 */
 function odczyt() {
 	//odczyt_adresu();
@@ -53,7 +55,7 @@ function odczyt() {
 }
 
 /**
-* @brief Start request timer
+* @brief Start timera
 */
 function startTimer(){
 	odczyt();
@@ -61,14 +63,14 @@ function startTimer(){
 }
 
 /**
-* @brief Stop request timer
+* @brief Zatrzymanie timera
 */
 function stopTimer(){
 	clearInterval(timer);
 }
 
 /**
-* @brief Execution of the function after starting the htm window
+* @brief Wykonanie funkcji po uruchomieniu okna htm
 */
 $(document).ready(() => { 
 	//odczyt();

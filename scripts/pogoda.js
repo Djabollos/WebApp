@@ -1,18 +1,18 @@
-var sampleTimeSec = 1;
-var sampleTimeMsec = 1000*sampleTimeSec;
-var maxSamplesNumber = 100;				///< maximum number of samples
+var sampleTimeSec = 1;						//czas probkowania w sekundach
+var sampleTimeMsec = 1000*sampleTimeSec;	//czas probkowania w milisekundach
+var maxSamplesNumber = 100;					//maksymalna liczba probek
 
-var xdata; ///< x-axis labels array: time stamps
-var ydata1; ///< y-axis data array: random value
-var ydata2;
-var ydata3;
+var xdata; 	//dane na osi x: czas
+var ydata1; //dane na osi y:
+var ydata2;	//dane na osi y:
+var ydata3;	//dane na osi y:
  
-var lastTimeStamp; ///< most recent time stamp 
+var lastTimeStamp; //najnowszy znacznik czasu
 
-var chartContext;  ///< chart context i.e. object that "owns" chart
-var chart
-var chart3
-var chart2; ///< Chart.js object
+var chartContext;  //kontekst wykresu(obiekt bedacy 'wlascicielem' wykresu)
+var chart		//obiekt Chart.js
+var chart3		//obiekt Chart.js
+var chart2; 	//obiekt Chart.js
 
 var mostNegativeValue = -35;
 var mostPositiveValue = 1260;

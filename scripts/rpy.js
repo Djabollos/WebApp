@@ -1,27 +1,29 @@
-//const sampleTimeSec = 0.1; 					///< sample time in sec
-//const sampleTimeMsec = 1000*sampleTimeSec;	///< sample time in msec
-var maxSamplesNumber = 100;				///< maximum number of samples
-var sampleTimeMsec;
-var sampleTimeSec = 0.1;
+var maxSamplesNumber = 100; //maksymalna liczba probek
+var sampleTimeMsec; 		//czas probkowania w milisekundach
+var sampleTimeSec = 0.1;	//czas probkowania w sekundach
 
-var xdata; ///< x-axis labels array: time stamps
-var ydata; ///< y-axis data array: random value
-var ydata2;
-var ydata3;
-var lastTimeStamp; ///< most recent time stamp 
+var xdata; 	//dane na osi x: czas
+var ydata; 	//dane na osi y: stopnie roll
+var ydata2;	//dane na osi y: stopnie pitch
+var ydata3;	//dane na osi y: stopnie yaw
+var lastTimeStamp; //najnowszy znacznik czasu
 
-var chartContext;  ///< chart context i.e. object that "owns" chart
-var chart; ///< Chart.js object
+var chartContext;  //kontekst wykresu(obiekt bedacy 'wlascicielem' wykresu)
+var chart; //obiekt Chart.js
 
-var a = '192.168.8.128';
-var zmienna;
+var a = '192.168.8.128';	//standardowe ip
+var zmienna;				//zmienna ktorej nadaje sie ip
 
-var timer; ///< request timer
+var timer; //do obslugi timera
 
 //const url1 = 'http://192.168.8.128/dane_pomiarowe.json'; ///< server app with JSON 
 //const adres = 'http://192.168.8.128/zapis.php';
 //const url2 = 'http://192.168.8.128/zapisane_dane.json';
 
+/**
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje z pliku serwera informacje o ip oraz porcie
+*/
 function odczyt_adresu() {
 	$.ajax({
 		type: 'GET',
@@ -33,6 +35,10 @@ function odczyt_adresu() {
 	});
 }
 
+/**
+* @brief Wysyla zadanie HTTP POST do serwera IoT
+* @note zapisuje do pliku serwera informacje o czasie probkowania i liczbie probkowania
+*/
 function zapis(){
 	dane = {
 	czaspro: $("#sampletime").val(),
@@ -60,13 +66,16 @@ function zapis(){
 	});
 }*/
 
+/**
+* @brief Przypisuje zmiennej liczbe probek odczytana od uzytkownika w htm
+*/
 function dana(){
 	maxSamplesNumber = parseInt($("#samplenumber").val());
 }
 
 /**
-* @brief Add new value to next data point.
-* @param y New y-axis value 
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc roll na osi y 
 */
 function addData(y){
 	if(ydata.length > maxSamplesNumber)
@@ -78,6 +87,10 @@ function addData(y){
 	ydata.push(y);
 	chart.update();
 }
+/**
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc pitch na osi y 
+*/
 function addData2(y){
 	if(ydata2.length > maxSamplesNumber)
 	{
@@ -88,6 +101,10 @@ function addData2(y){
 	ydata2.push(y);
 	chart.update();
 }
+/**
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc yaw na osi y 
+*/
 function addData3(y){
 	if(ydata3.length > maxSamplesNumber)
 	{
@@ -99,7 +116,7 @@ function addData3(y){
 	chart.update();
 }
 /**
-* @brief Remove oldest data point.
+* @brief Usuwa najstarszy punkt danych
 */
 function removeOldData(){
 	xdata.splice(0,1);
@@ -107,12 +124,17 @@ function removeOldData(){
 	ydata2.splice(0,1);
 	ydata3.splice(0,1);
 }
+
+/**
+* @brief Przypisuje zmiennej wartosc czasu probkowania od uzytkownika z htm 
+*/
 function czasProb() {
 	sampleTimeMsec = parseFloat($("#sampletime").val());
 	sampleTimeSec = sampleTimeMsec/1000;
 }
+
 /**
-* @brief Start request timer
+* @brief Start timera
 */
 function startTimer(){
 	zapis();
@@ -122,14 +144,15 @@ function startTimer(){
 }
 
 /**
-* @brief Stop request timer
+* @brief Stop timera
 */
 function stopTimer(){
 	clearInterval(timer);
 }
 
 /**
-* @brief Send HTTP GET request to IoT server
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje wszystkie dane pogodowe z pliku serwera
 */
 function ajaxJSON() {
 	$.ajax('http://'+zmienna+'/dane_pomiarowe.json', {
@@ -143,7 +166,7 @@ function ajaxJSON() {
 }
 
 /**
-* @brief Chart initialization
+* @brief Inicjalizacja wykresu
 */
 function chartInit()
 {
@@ -220,6 +243,9 @@ function chartInit()
 	xdata = chart.data.labels;
 }
 
+/**
+* @brief Wykonanie funkcji po uruchomieniu okna htm
+*/
 $(document).ready(() => {
 	odczyt_adresu();
 	chartInit();

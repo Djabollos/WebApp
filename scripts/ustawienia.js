@@ -1,12 +1,8 @@
-var a = '192.168.8.128';
-//var ip = parsedocument.getElementById("adres_s").value;
-//var url = "http://"+a+"/ustawienia.php";
-//var url2 = "http://"+a+"/ustawienia.json";
-//$("#tem").text(ip.toString());
-//var wynik = obliczenia[format()](wartosc).toString();
+var a = '192.168.8.128';	//standardowe ip
 
 /**
-* @brief Send HTTP POST request to IoT server
+* @brief Wysyla zadanie HTTP POST do serwera IoT
+* @note zapisuje ip oraz port podany przez uzytkownika do pliku
 */
 function zapis_do_pliku(){
 	dane = {
@@ -26,7 +22,8 @@ function zapis_do_pliku(){
 }
 
 /**
-* @brief Send HTTP GET request to IoT server
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje z pliku serwera informacje o ip oraz porcie
 */
 function odczyt_adresu() {
 	$.ajax({
@@ -42,6 +39,9 @@ function odczyt_adresu() {
 	});
 }
 
+/**
+* @brief Wykonanie funkcji po uruchomieniu okna htm
+*/
 $(document).ready(() => { 
 	odczyt_adresu();
 	//$("#adres_s").val(ip); //document.getElementById("adres_s").value = ip;
