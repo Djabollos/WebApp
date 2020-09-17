@@ -3,27 +3,31 @@ var sampleTimeMsec = 1000*sampleTimeSec;	//czas probkowania w milisekundach
 var maxSamplesNumber = 100;					//maksymalna liczba probek
 
 var xdata; 	//dane na osi x: czas
-var ydata1; //dane na osi y:
-var ydata2;	//dane na osi y:
+var ydata1; //dane na osi y: temperatura
+var ydata2;	//dane na osi y: ciesnienie
 var ydata3;	//dane na osi y:
  
 var lastTimeStamp; //najnowszy znacznik czasu
 
 var chartContext;  //kontekst wykresu(obiekt bedacy 'wlascicielem' wykresu)
-var chart		//obiekt Chart.js
-var chart3		//obiekt Chart.js
-var chart2; 	//obiekt Chart.js
+var chart		//obiekt Chart.js: temperatura
+var chart1		//obiekt Chart.js: ciesnienie
+var chart2; 	//obiekt Chart.js: wilgotnosc
 
-var mostNegativeValue = -35;
-var mostPositiveValue = 1260;
+var mostNegativeValue = -35;	//maksymalna ujemna wartosc osi y
+var mostPositiveValue = 1260;	//maksymalna dodatnia wartosc osi y
 
-var a = '192.168.8.128';
-var zmienna;
+var a = '192.168.8.128';	//standardowe ip
+var zmienna;				//zmienna ktorej nadaje sie ip
 
-var timer; ///< request timer
+var timer; 		//do obslugi timera
 
-//const url = 'http://192.168.8.128/dane_pomiarowe.json'; ///< server app with JSON API
+//const url = 'http://192.168.8.128/dane_pomiarowe.json';
 
+/**
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje z pliku serwera informacje o ip oraz porcie
+*/
 function odczyt_adresu() {
 	$.ajax({
 		type: 'GET',
@@ -37,8 +41,8 @@ function odczyt_adresu() {
 
 $.ajaxSetup({ cache: false });
 /**
-* @brief Add new value to next data point.
-* @param y New y-axis value 
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc temperatury na osi y 
 */
 function addData1(y){
 	if(ydata1.length > maxSamplesNumber)
@@ -50,6 +54,10 @@ function addData1(y){
 	ydata1.push(y);
 	chart.update();
 }
+/**
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc ciesnienia na osi y 
+*/
 function addData2(y){
 	if(ydata2.length > maxSamplesNumber)
 	{
@@ -60,6 +68,10 @@ function addData2(y){
 	ydata2.push(y);
 	chart1.update();
 }
+/**
+* @brief Dodaje nowa wartosc do nastepnego punktu danych
+* @param y nowa wartosc wilgotnosci na osi y 
+*/
 function addData3(y){
 	if(ydata3.length > maxSamplesNumber)
 	{
@@ -72,7 +84,7 @@ function addData3(y){
 }
 
 /**
-* @brief Remove oldest data point.
+* @brief Usuwa najstarszy punkt danych
 */
 function removeOldData(){
 	xdata.splice(0,1);
@@ -82,7 +94,8 @@ function removeOldData(){
 }
 
 /**
-* @brief Start request timer
+* @brief Start timera oraz zadanie HTTP POST
+* @note funkcja odczytuje takze wartosci podane przez uzytkownika i wysyla je na serwer
 */
 function startTimer(){
 	sampleTimeMsec = parseInt($('#sampletime').val());
@@ -96,14 +109,15 @@ function startTimer(){
 
 
 /**
-* @brief Stop request timer
+* @brief Stop timera
 */
 function stopTimer(){
 	clearInterval(timer);
 }
 
 /**
-* @brief Send HTTP GET request to IoT server
+* @brief Wysyla zadanie HTTP GET do serwera IoT
+* @note odczytuje wszystkie dane pogodowe z pliku serwera
 */
 function ajaxJSON() {
 	$.ajax('http://'+zmienna+'/dane_pomiarowe.json', {
@@ -116,12 +130,9 @@ function ajaxJSON() {
 	});
 }
 
-
-
 /**
-* @brief Chart initialization
+* @brief Inicjalizacja wykresu
 */
-		
 function chartInit()
 {
 		
@@ -190,13 +201,7 @@ function chartInit()
 			}
 		}
 	});
-	
-	
-	
-	
-	
-	
-	
+		
 	chart1 = new Chart(chartContext1, {
 		// The type of chart: linear plot
 		type: 'line',
@@ -239,13 +244,7 @@ function chartInit()
 			}
 		}
 	});
-	
-	
-	
-	
-	
-	
-	
+		
 	chart2 = new Chart(chartContext2, {
 		// The type of chart: linear plot
 		type: 'line',
@@ -296,6 +295,9 @@ function chartInit()
 	xdata = chart.data.labels;
 }
 
+/**
+* @brief Wykonanie funkcji po uruchomieniu okna htm
+*/
 $(document).ready(() => { 
 	odczyt_adresu();
 	$("#start").click(startTimer);

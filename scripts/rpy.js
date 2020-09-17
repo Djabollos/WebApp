@@ -152,7 +152,7 @@ function stopTimer(){
 
 /**
 * @brief Wysyla zadanie HTTP GET do serwera IoT
-* @note odczytuje wszystkie dane pogodowe z pliku serwera
+* @note odczytuje wszystkie dane katow z pliku serwera
 */
 function ajaxJSON() {
 	$.ajax('http://'+zmienna+'/dane_pomiarowe.json', {
